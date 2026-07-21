@@ -857,8 +857,6 @@ spec:
           value: "deployment.environment=production,service.version=1.0.0"
         - name: OTEL_SERVICE_NAME
           value: "paymentservice"
-        - name: NODE_OPTIONS
-          value: "--require @opentelemetry/auto-instrumentations-node/register"
 
         # --- OPENCENSUS / GCP BRIDGE ENDPOINTS ---
         - name: COLLECTOR_SERVICE_ADDR
