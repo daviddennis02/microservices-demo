@@ -70,6 +70,11 @@ spec:
               - name: "Cookie"
                 value: "shop_session-id=x-liveness-probe"
           env:
+          # --- TRACING FEATURE FLAGS (Covers both OpenCensus & OpenTelemetry builds) ---
+          - name: ENABLE_TRACING
+            value: "1"
+          - name: DISABLE_TRACING
+            value: "0"
           - name: OTEL_EXPORTER_OTLP_ENDPOINT
             value: "http://otel-collector-gateway.monitoring.svc.cluster.local:4318" # Switch to OTLP/HTTP port 4318
           - name: OTEL_EXPORTER_OTLP_PROTOCOL
