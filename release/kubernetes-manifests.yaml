@@ -88,6 +88,16 @@ spec:
             value: "adservice:9555"
           - name: SHOPPING_ASSISTANT_SERVICE_ADDR
             value: "shoppingassistantservice:80"
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT
+            value: "http://$(HOST_IP):4317"
+          - name: OTEL_SERVICE_NAME
+            value: "frontend"
+          - name: OTEL_RESOURCE_ATTRIBUTES
+            value: "deployment.environment=production,service.version=1.0.0"
+          - name: HOST_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
           # # ENV_PLATFORM: One of: local, gcp, aws, azure, onprem, alibaba
           # # When not set, defaults to "local" unless running in GKE, otherwies auto-sets to gcp
           # - name: ENV_PLATFORM
@@ -574,6 +584,16 @@ spec:
           value: "productcatalogservice:3550"
         - name: DISABLE_PROFILER
           value: "1"
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          value: "http://$(HOST_IP):4317"
+        - name: OTEL_SERVICE_NAME
+          value: "recommendationservice"
+        - name: OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED
+          value: "true"
+        - name: HOST_IP
+    valueFrom:
+      fieldRef:
+        fieldPath: status.hostIP
         resources:
           requests:
             cpu: 100m
@@ -870,6 +890,16 @@ spec:
           value: "50051"
         - name: DISABLE_PROFILER
           value: "1"
+        - name: OTEL_EXPORTER_OTLP_ENDPOINT
+          value: "http://$(HOST_IP):4317"
+        - name: OTEL_SERVICE_NAME
+          value: "paymentservice"
+        - name: NODE_OPTIONS
+          value: "--require @opentelemetry/auto-instrumentations-node/register"
+        - name: HOST_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
         readinessProbe:
           periodSeconds: 5
           grpc:
