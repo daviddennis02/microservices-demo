@@ -70,8 +70,14 @@ spec:
               - name: "Cookie"
                 value: "shop_session-id=x-liveness-probe"
           env:
-          - name: OTEL_GATEWAY_HOST
-            value: "otel-collector-gateway.monitoring.svc.cluster.local"
+          - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://otel-collector-gateway.monitoring.svc.cluster.local:4318" # Switch to OTLP/HTTP port 4318
+          - name: OTEL_EXPORTER_OTLP_PROTOCOL
+            value: "http/protobuf"
+          - name: OTEL_SERVICE_NAME
+            value: "frontend"
+          - name: OTEL_RESOURCE_ATTRIBUTES
+            value: "deployment.environment=production,service.version=1.0.0"
           - name: PORT
             value: "8080"
           - name: PRODUCT_CATALOG_SERVICE_ADDR
@@ -90,12 +96,6 @@ spec:
             value: "adservice:9555"
           - name: SHOPPING_ASSISTANT_SERVICE_ADDR
             value: "shoppingassistantservice:80"
-          - name: OTEL_EXPORTER_OTLP_ENDPOINT
-            value: "http://$(OTEL_GATEWAY_HOST):4317"
-          - name: OTEL_SERVICE_NAME
-            value: "frontend"
-          - name: OTEL_RESOURCE_ATTRIBUTES
-            value: "deployment.environment=production,service.version=1.0.0"
           # # ENV_PLATFORM: One of: local, gcp, aws, azure, onprem, alibaba
           # # When not set, defaults to "local" unless running in GKE, otherwies auto-sets to gcp
           # - name: ENV_PLATFORM
