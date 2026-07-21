@@ -75,14 +75,20 @@ spec:
             value: "1"
           - name: DISABLE_TRACING
             value: "0"
+          # --- OPENTELEMETRY STANDARD ENDPOINTS ---
           - name: OTEL_EXPORTER_OTLP_ENDPOINT
-            value: "http://otel-collector-gateway.monitoring.svc.cluster.local:4318" # Switch to OTLP/HTTP port 4318
+            value: "http://otel-collector-gateway.monitoring.svc.cluster.local:4318"
           - name: OTEL_EXPORTER_OTLP_PROTOCOL
             value: "http/protobuf"
           - name: OTEL_SERVICE_NAME
             value: "frontend"
           - name: OTEL_RESOURCE_ATTRIBUTES
             value: "deployment.environment=production,service.version=1.0.0"
+
+          # --- OPENCENSUS / GCP BRIDGE ENDPOINTS ---
+          - name: COLLECTOR_SERVICE_ADDR
+            value: "otel-collector-gateway.monitoring.svc.cluster.local:4318"
+            
           - name: PORT
             value: "8080"
           - name: PRODUCT_CATALOG_SERVICE_ADDR
