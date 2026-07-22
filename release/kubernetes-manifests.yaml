@@ -86,7 +86,7 @@ spec:
           - name: OTEL_SERVICE_NAME
             value: "frontend"
           - name: OTEL_RESOURCE_ATTRIBUTES
-            value: "deployment.environment=production,service.version=1.0.0"
+            value: "deployment.environment=production,service.version=0.10.6,service.name=frontend"
 
           # --- OPENCENSUS / GCP BRIDGE ENDPOINTS ---
           - name: COLLECTOR_SERVICE_ADDR
@@ -597,7 +597,7 @@ spec:
           value: "0"
         - name: DISABLE_PROFILER
           value: "1"
-          
+
         # --- OPENTELEMETRY STANDARD ENDPOINTS ---
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
           value: "otel-collector-gateway.monitoring.svc.cluster.local:4317"
@@ -606,7 +606,7 @@ spec:
         - name: OTEL_EXPORTER_OTLP_PROTOCOL
           value: "grpc"
         - name: OTEL_RESOURCE_ATTRIBUTES
-          value: "deployment.environment=production,service.version=1.0.0"
+          value: "deployment.environment=production,service.version=0.10.6,service.name=recommendationservice"
         - name: OTEL_SERVICE_NAME
           value: "recommendationservice"
         - name: OTEL_PYTHON_LOGGING_AUTO_INSTRUMENTATION_ENABLED
@@ -856,7 +856,7 @@ spec:
         - name: OTEL_EXPORTER_OTLP_PROTOCOL
           value: "grpc"
         - name: OTEL_RESOURCE_ATTRIBUTES
-          value: "deployment.environment=production,service.version=1.0.0"
+          value: "deployment.environment=production,service.version=0.10.6,service.name=paymentservice"
         - name: OTEL_SERVICE_NAME
           value: "paymentservice"
 
